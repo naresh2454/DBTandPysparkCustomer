@@ -1,10 +1,10 @@
 import pyspark.sql.functions as F
 
 def model(dbt, session):
-    # Configure materialization for the Gold table
+    # Configure materialization using your catalog name
     dbt.config(
         materialized="table",
-        catalog="main",
+        catalog="dbtandpyspark1",
         schema="gold"
     )
 
@@ -12,7 +12,7 @@ def model(dbt, session):
     customers_df = dbt.ref("silver_customers")
     orders_df = dbt.ref("silver_orders")
 
-    # 2. Perform PySpark DataFrame transformations & aggregations
+    # 2. Perform PySpark transformations & aggregations
     customer_stats = orders_df.groupBy("customer_id").agg(
         F.count("order_id").alias("total_orders"),
         F.sum("amount").alias("lifetime_value"),
@@ -20,7 +20,6 @@ def model(dbt, session):
         F.max("order_date").alias("last_order_date")
     )
 
-    # Join customer profile with their computed order statistics
     final_df = customers_df.join(
         customer_stats,
         customers_df["customer_id"] == customer_stats["customer_id"],
@@ -34,7 +33,6 @@ def model(dbt, session):
         customer_stats["last_order_date"]
     )
 
-    # Create a machine learning feature flag
     scored_df = final_df.withColumn(
         "is_high_value",
         F.when(F.col("lifetime_value") > 500, True).otherwise(False)

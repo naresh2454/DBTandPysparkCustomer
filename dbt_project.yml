@@ -10,13 +10,13 @@ models:
   databricks_git_demo:
     bronze:
       +materialized: table
-      +catalog: main
+      +catalog: dbtandpyspark1
       +schema: bronze
     silver:
       +materialized: table
-      +catalog: main
+      +catalog: dbtandpyspark1
       +schema: silver
     gold:
       +materialized: table
-      +catalog: main
+      +catalog: dbtandpyspark1
       +schema: gold
