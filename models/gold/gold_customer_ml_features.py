@@ -1,11 +1,12 @@
 import pyspark.sql.functions as F
 
 def model(dbt, session):
-    # Configure materialization using your catalog name
+    # Explicitly configure the model for Databricks execution
     dbt.config(
         materialized="table",
         catalog="dbtandpyspark1",
-        schema="gold"
+        schema="gold",
+        submission_method="serverless"  # <-- Tell dbt to use serverless compute for the Python model
     )
 
     # 1. Pull cleaned data from upstream silver models using dbt.ref()
@@ -38,5 +39,4 @@ def model(dbt, session):
         F.when(F.col("lifetime_value") > 500, True).otherwise(False)
     )
 
-    # 3. Return the final PySpark DataFrame back to dbt
     return scored_df
