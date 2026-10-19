@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw_system
+    description: "Raw operational tables ingested into Unity Catalog."
+    catalog: main
+    schema: raw
+    tables:
+      - name: raw_customers
+      - name: raw_orders

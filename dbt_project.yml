@@ -1,13 +1,13 @@
-name: 'databricks_dbt_demo'
+name: 'databricks_git_demo'
 version: '1.0.0'
 config-version: 2
 
-profile: 'databricks_demo_profile'
+profile: 'databricks_default'
 
 model-paths: ["models"]
 
 models:
-  databricks_dbt_demo:
+  databricks_git_demo:
     bronze:
       +materialized: table
       +catalog: main
