@@ -1,12 +1,12 @@
-databricks_demo_profile:
-  target: dev
-  outputs:
-    dev:
-      type: databricks
-      method: token
-      host: <your-databricks-instance>.azuredatabricks.net # or .cloud.databricks.com
-      http_path: /sql/1.0/warehouses/<your-warehouse-id>
-      token: <your-databricks-pat-token>
-      catalog: main
-      schema: default
-      threads: 4
+# databricks_demo_profile:
+#   target: dev
+#   outputs:
+#     dev:
+#       type: databricks
+#       method: token
+#       host: <your-databricks-instance>.azuredatabricks.net # or .cloud.databricks.com
+#       http_path: /sql/1.0/warehouses/<your-warehouse-id>
+#       token: <your-databricks-pat-token>
+#       catalog: main
+#       schema: default
+#       threads: 4
