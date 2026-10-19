@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: silver_customers
+    description: "Cleaned and deduplicated customer records."
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        tests:
+          - not_null
+
+  - name: silver_orders
+    description: "Cleaned and casted order records."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null

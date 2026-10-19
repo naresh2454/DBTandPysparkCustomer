@@ -1,0 +1,22 @@
+name: 'databricks_dbt_demo'
+version: '1.0.0'
+config-version: 2
+
+profile: 'databricks_demo_profile'
+
+model-paths: ["models"]
+
+models:
+  databricks_dbt_demo:
+    bronze:
+      +materialized: table
+      +catalog: main
+      +schema: bronze
+    silver:
+      +materialized: table
+      +catalog: main
+      +schema: silver
+    gold:
+      +materialized: table
+      +catalog: main
+      +schema: gold
